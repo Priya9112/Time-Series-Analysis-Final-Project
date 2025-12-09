@@ -1,178 +1,154 @@
 Hybrid Time-Series Volatility Forecasting Project
+
 1. Overview
 
-This project implements a hybrid forecasting framework combining classical econometric models (ARIMA, GARCH) with deep learning architectures (LSTM and Transformer) to predict daily stock market volatility.
+- Hybrid model combining ARIMA, GARCH, LSTM, and Transformer.
 
-The workflow follows the DSCC 475 methodology, including:
+- Predicts daily stock market volatility.
 
-Data preprocessing
+- Follows DSCC 475 methodology.
 
-Exploratory analysis
-
-Classical statistical modeling
-
-Deep learning forecasting
-
-Hybrid ensemble integration
-
-All code is contained in the provided Jupyter/Colab notebook. Results are reproducible by following the steps below.
+- Fully reproducible using the provided Colab notebook.
 
 2. How to Run the Notebook
 
-The notebook is designed to run in Google Colab.
+- Open Google Colab and upload the notebook.
 
-Execution Steps
-
-Open Google Colab and upload the project notebook.
-
-Mount Google Drive:
+- Mount Google Drive:
 
 from google.colab import drive
 drive.mount('/content/drive')
 
 
-Ensure datasets are stored at:
+- Store datasets in:
 
 /content/drive/MyDrive/TSA/
 
 
-Enable GPU:
+- Enable GPU: Runtime → Change Runtime Type → GPU.
 
-Runtime → Change Runtime Type → Hardware Accelerator → GPU
-
-Run the notebook sequentially from top to bottom.
+- Run the notebooks from top to bottom.
 
 3. Required Libraries
 
-The notebook installs missing dependencies automatically.
-Core libraries:
+* pandas
 
-Time-Series and Econometrics
+* numpy
 
-pandas
+* statsmodels
 
-numpy
+* pmdarima
 
-statsmodels
+* arch
 
-pmdarima
+* tensorflow
 
-arch
+* keras
 
-Machine Learning / Deep Learning
+* scikit-learn
 
-tensorflow
+* matplotlib
 
-keras
-
-scikit-learn
-
-Visualization
-
-matplotlib
-
-If manual installation is needed:
+Install manually if needed:
 
 pip install numpy pandas matplotlib statsmodels pmdarima arch tensorflow scikit-learn
 
-4. Dataset Files and Paths
+4. Dataset Files
 
-Datasets used for modeling:
+* AAPL_clean.csv
 
-/content/drive/MyDrive/TSA/AAPL_clean.csv
-/content/drive/MyDrive/TSA/TSLA_clean.csv
-/content/drive/MyDrive/TSA/SPY_clean.csv
+* TSLA_clean.csv
+
+* SPY_clean.csv
+
+Path:
+
+/content/drive/MyDrive/TSA/
 
 
-Each file contains:
+Columns:
 
-Close — Adjusted closing price
+* Close
 
-LogReturn — Daily log returns
+* LogReturn
 
-Volatility_21 — 21-day rolling standard deviation
+* Volatility_21
 
-Volatility_7 — 7-day rolling standard deviation
+* Volatility_7
 
-Volume — Trading volume
+* Volume
 
-To load a dataset:
+Load example:
 
 df = pd.read_csv(
     "/content/drive/MyDrive/TSA/AAPL_clean.csv",
     index_col=0, parse_dates=True
 )
 
-5. Steps to Reproduce the Results
+5. Analysis Workflow
+   
+Week 1 — Data Preparation
 
-The notebook sections mirror the analytical pipeline.
+- Load and clean datasets.
 
-Week 1 — Data Preparation & Exploratory Analysis
+- Generate log returns and rolling volatility.
 
-Load and clean datasets
+- Run ADF, ACF, and PACF tests.
 
-Generate engineered features
+- Visualize price trends and volatility clustering.
 
-ADF, ACF, PACF diagnostics
+Week 2 — ARIMA and GARCH
 
-Visualize trends and volatility clustering
+- Fit ARIMA on log returns.
 
-Week 2 — Classical Models: ARIMA & GARCH
+- Fit GARCH(1,1) for volatility.
 
-Fit ARIMA on log returns
+- Forecast returns and volatility.
 
-Fit GARCH(1,1) for conditional volatility
+- Compare predictions with realized volatility.
 
-Forecast returns and volatility
+- Compute RMSE.
 
-Compare predicted vs realized volatility
+Week 3 — LSTM
 
-Compute RMSE for each ticker
+- Normalize volatility series.
 
-Week 3 — Deep Learning: LSTM
+- Create 30-day input sequences.
 
-Normalize volatility series
+- Train LSTM models.
 
-Construct 30-day input sequences
+- Evaluate using RMSE and directional accuracy.
 
-Train LSTM models for 1-step and multi-step forecasts
+- Plot predictions.
 
-Evaluate using RMSE & directional accuracy
+Week 4 — Transformer and Hybrid Ensemble
 
-Generate comparison plots
+- Implement a compact Transformer encoder.
 
-Week 4 — Transformer & Hybrid Ensemble
+- Train models for each ticker.
 
-Implement compact Transformer encoder
+- Align ARIMA, GARCH, LSTM, Transformer predictions.
 
-Train for each ticker
+- Build a hybrid ensemble using non-negative regression.
 
-Align predictions across all models
+- Generate final evaluation tables and plots.
 
-Construct hybrid ensemble (non-negative regression)
+6. Outputs Generated
 
-Produce final evaluation tables & visualizations
+- Forecast plots for all models.
 
-6. Output & Reproducibility
+- RMSE comparison tables.
 
-The notebook automatically produces:
+- Directional accuracy metrics.
 
-Forecast plots (ARIMA, GARCH, LSTM, Transformer)
+- Ensemble weight tables.
 
-RMSE comparison tables
-
-Directional accuracy metrics
-
-Ensemble weight tables
-
-Final ensemble forecast visualizations
-
-All results will reproduce consistently when executed in order.
+vFinal ensemble forecast visualizations.
 
 7. Notes
 
-Deep learning steps require GPU; statistical models run on CPU.
+- Deep learning steps require GPU.
 
-Update file paths if datasets are elsewhere.
+- Update file paths if different.
 
-Notebook assumes cleaned CSVs; raw data cleaning is documented separately.
+- Assumes cleaned CSVs exist.
