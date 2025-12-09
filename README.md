@@ -60,23 +60,27 @@ df = pd.read_csv("/content/drive/MyDrive/TSA/AAPL_clean.csv",
 
 5. Steps to Reproduce the Results
 The notebook is organized into structured sections that mirror the analytical pipeline.
+
 Week 1 — Data Preparation and Exploratory Analysis
 	•	Load and clean datasets.
 	•	Generate engineered features (log returns, rolling volatility).
 	•	Perform ADF, ACF, and PACF diagnostics.
 	•	Visualize price trends and volatility clustering.
+	
 Week 2 — Classical Models: ARIMA and GARCH
 	•	Fit ARIMA models on log returns.
 	•	Fit GARCH(1,1) models to capture conditional volatility.
 	•	Forecast returns and volatility.
 	•	Compare predicted and realized volatility.
 	•	Compute RMSE for each ticker.
+	
 Week 3 — Deep Learning Models: LSTM
 	•	Normalize volatility series.
 	•	Construct 30-day input sequences.
 	•	Train LSTM models for t+1 and multi-step forecasts.
 	•	Evaluate predictions using RMSE and directional accuracy.
 	•	Generate comparative plots.
+	
 Week 4 — Transformer Model and Hybrid Ensemble
 	•	Implement a compact Transformer encoder for volatility forecasting.
 	•	Train models for each ticker.
@@ -84,7 +88,7 @@ Week 4 — Transformer Model and Hybrid Ensemble
 	•	Construct a hybrid weighted ensemble using non-negative linear regression.
 	•	Produce final evaluation metrics and ensemble performance tables.
 
-6. Output and Reproducibility
+7. Output and Reproducibility
 The notebook automatically produces:
 	•	Forecast plots for ARIMA, GARCH, LSTM, and Transformer models
 	•	Comparative RMSE tables
@@ -93,7 +97,7 @@ The notebook automatically produces:
 	•	Ensemble forecast visualizations
 All results are generated using deterministic steps and will reproduce consistently when executed in order.
 
-7. Notes
+8. Notes
 	•	Deep learning sections require GPU acceleration; statistical models run on CPU.
 	•	All file paths must be updated if datasets are stored in a different location.
 	•	The notebook assumes cleaned CSV files are available; raw data cleaning is documented separately.
